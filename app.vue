@@ -26,6 +26,10 @@
         `"
       />
     </div>
+
+    <div class="list" v-for="point in points" :key="point.x">
+      <span>{{ point.name }}</span> <span>{{ point.x }}</span>
+    </div>
   </div>
 </template>
 
@@ -35,13 +39,34 @@ const file = ref();
 const boxes = ref();
 const loading = ref(false);
 
+const points = computed(() => {
+  if (!boxes.value || !boxes.value.length) {
+    return [];
+  }
+
+  const pointList: Point[] = boxes.value.map((box: PredictData) => ({
+    name: box.name,
+    x: (box.xmax + box.xmin) / 2,
+  }));
+
+  const sortedPoints = pointList.sort((a: Point, b: Point) => a.x - b.x);
+  const first = sortedPoints[0].x;
+  const last = sortedPoints[sortedPoints.length - 1].x;
+  const multiplyier = 1 / (last - first);
+
+  return sortedPoints.map((point: Point) => {
+    const normalizedX = (point.x - first) * multiplyier;
+    return { ...point, x: Number(normalizedX.toFixed(2)) };
+  });
+});
+
 const changeHandler = (event: Event) => {
   const files = (<HTMLInputElement>event.target).files;
 
   if (files?.length) {
     const firstFile = files[0];
     file.value = firstFile;
-    boxes.value = null
+    boxes.value = null;
 
     const loadFile = (event: ProgressEvent<FileReader>) => {
       image.value = event.target?.result;
