@@ -29,10 +29,13 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from "pinia";
+
+const predictStore = usePredictStore();
+const { fetchPredictData, changeBoxes } = predictStore;
+const { boxes, loading } = storeToRefs(predictStore);
 const imageSize = reactive({ width: 0, height: 0 });
-const loading = ref(false);
 const imageRef = ref();
-const boxes = ref();
 const image = ref();
 const file = ref();
 
@@ -72,7 +75,7 @@ const imageChangeHandler = (event: Event) => {
   if (files?.length) {
     const firstFile = files[0];
     file.value = firstFile;
-    boxes.value = null;
+    changeBoxes(null);
 
     const loadFile = (event: ProgressEvent<FileReader>) => {
       image.value = event.target?.result;
@@ -88,15 +91,7 @@ const imageChangeHandler = (event: Event) => {
 const submitHandler = async () => {
   const formData = new FormData();
   formData.append("file", file.value);
-
-  loading.value = true;
-  const { data } = await useFetch("https://vktrpnzrv.fvds.ru/predict", {
-    method: "post",
-    body: formData,
-  });
-
-  loading.value = false;
-  boxes.value = data.value as PredictData[];
+  fetchPredictData(formData);
 };
 </script>
 
