@@ -6,24 +6,19 @@
         type="file"
         id="file"
         accept=".png,.jpg,.jpeg,.webp"
-        @change="changeHandler"
+        @change="imageChangeHandler"
         required
       />
       <button type="submit" :disabled="loading">Отправить</button>
     </form>
 
     <div class="image-container">
-      <img :src="image" />
-      <div
-        class="boxes"
+      <img ref="imageRef" :src="image" />
+      <DraggableBox
         v-for="box in boxes"
         :key="box.confidence"
-        :style="`
-          left: ${box.xmin * 100}%;
-          top: ${box.ymin * 100}%;
-          width: ${(box.xmax - box.xmin) * 100}%;
-          height: ${(box.ymax - box.ymin) * 100}%
-        `"
+        :imageSize="imageSize"
+        :box="box"
       />
     </div>
 
@@ -34,10 +29,21 @@
 </template>
 
 <script lang="ts" setup>
+const imageSize = reactive({ width: 0, height: 0 });
+const loading = ref(false);
+const imageRef = ref();
+const boxes = ref();
 const image = ref();
 const file = ref();
-const boxes = ref();
-const loading = ref(false);
+
+watch(image, () => {
+  nextTick(() => {
+    if (imageRef.value) {
+      imageSize.width = imageRef.value.width;
+      imageSize.height = imageRef.value.height;
+    }
+  });
+});
 
 const points = computed(() => {
   if (!boxes.value || !boxes.value.length) {
@@ -60,7 +66,7 @@ const points = computed(() => {
   });
 });
 
-const changeHandler = (event: Event) => {
+const imageChangeHandler = (event: Event) => {
   const files = (<HTMLInputElement>event.target).files;
 
   if (files?.length) {
@@ -106,10 +112,5 @@ form {
   position: relative;
   margin-top: 20px;
   width: fit-content;
-}
-
-.boxes {
-  position: absolute;
-  border: 2px dashed red;
 }
 </style>
