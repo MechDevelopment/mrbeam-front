@@ -1,3 +1,17 @@
 $app-width: 832px;
 
-$red: red;
+:root {
+  --main-color: #ffffff;
+  --primary-color: #ff6b3f;
+  --secondary-color: #f5f5f5;
+  --accent-color: #11191e;
+  --text-color: #11191e;
+}
+
+.dark-mode:root {
+  --main-color: #141e24;
+  --primary-color: #ff6b3f;
+  --secondary-color: #11191e;
+  --accent-color: #f5f5f5;
+  --text-color: #f5f5f5;
+}

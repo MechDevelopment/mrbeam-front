@@ -1,9 +1,13 @@
 <template>
-  <header><nav>Mr Beam</nav></header>
+  <header>
+    <nav>Mr Beam</nav>
+    <LayoutThemeButton />
+  </header>
 </template>
 
 <style lang="scss">
 header {
-  background-color: $red;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
