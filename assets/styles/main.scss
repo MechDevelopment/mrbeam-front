@@ -1,12 +1,12 @@
 .container {
   margin: 0 auto;
-  max-width: 1180px;
+  max-width: $app-width;
 
-  @include mw(1280px) {
-    margin: 0 50px;
+  @include mw($app-width + 64px) {
+    margin: 0 32px;
   }
 
-  @include mw(719px) {
-    margin: 0 30px;
+  @include mw(450px) {
+    margin: 0 16px;
   }
 }
