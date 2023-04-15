@@ -1,4 +1,4 @@
 interface Point {
-  name: string;
-  x: number;
+  name: string
+  x: number
 }

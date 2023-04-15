@@ -21,55 +21,55 @@ const props = defineProps({
     type: Object as () => ImageSize,
     default: { width: 0, height: 0 },
   },
-});
+})
 
-const box = reactive(props.box);
+const box = reactive(props.box)
 
-const divRef = ref();
-let pointerId: number | null = null;
-let offset = { x: 0, y: 0 };
+const divRef = ref()
+let pointerId: number | null = null
+let offset = { x: 0, y: 0 }
 
 const updateBox = (x: number, y: number) => {
-  box.xmin += x;
-  box.xmax += x;
-  box.ymin += y;
-  box.ymax += y;
-};
+  box.xmin += x
+  box.xmax += x
+  box.ymin += y
+  box.ymax += y
+}
 
 const onStart = (event: PointerEvent) => {
-  pointerId = event.pointerId;
-  offset = { x: event.x, y: event.y };
+  pointerId = event.pointerId
+  offset = { x: event.x, y: event.y }
 
   const onMove = (event: PointerEvent) => {
-    if (event.pointerId !== pointerId) return;
-    const { width, height } = props.imageSize;
+    if (event.pointerId !== pointerId) return
+    const { width, height } = props.imageSize
 
-    const x = event.x - offset.x;
-    const y = event.y - offset.y;
+    const x = event.x - offset.x
+    const y = event.y - offset.y
 
-    offset = { x: event.x, y: event.y };
+    offset = { x: event.x, y: event.y }
 
-    updateBox(x / width, y / height);
-  };
+    updateBox(x / width, y / height)
+  }
 
   const onEnd = () => {
-    document.removeEventListener("pointermove", onMove);
-    document.removeEventListener("pointerup", onEnd);
-  };
+    document.removeEventListener('pointermove', onMove)
+    document.removeEventListener('pointerup', onEnd)
+  }
 
-  document.addEventListener("pointermove", onMove, { passive: true });
-  document.addEventListener("pointerup", onEnd, { passive: true });
-};
+  document.addEventListener('pointermove', onMove, { passive: true })
+  document.addEventListener('pointerup', onEnd, { passive: true })
+}
 
 onMounted(() => {
-  divRef.value.addEventListener("pointerdown", onStart, {
+  divRef.value.addEventListener('pointerdown', onStart, {
     passive: true,
-  });
-});
+  })
+})
 
 onBeforeUnmount(() => {
-  divRef.value.removeEventListener("pointerdown", onStart);
-});
+  divRef.value.removeEventListener('pointerdown', onStart)
+})
 </script>
 
 <style>

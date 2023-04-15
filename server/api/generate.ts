@@ -1,5 +1,5 @@
-import generate from "../src/generate";
+import generate from '../src/generate'
 
 export default defineEventHandler(() => {
-  return JSON.stringify(generate(), null, 4);
-});
+  return JSON.stringify(generate(), null, 4)
+})

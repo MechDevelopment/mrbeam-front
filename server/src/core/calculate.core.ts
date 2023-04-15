@@ -1,4 +1,4 @@
-import { Elem } from "../services/element";
+import { Elem } from '../services/element'
 
 export interface CalculateOptions {
   count?: number

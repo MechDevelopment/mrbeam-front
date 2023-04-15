@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@pinia/nuxt", "@nuxtjs/color-mode"],
+  modules: ['@pinia/nuxt', '@nuxtjs/color-mode', '@nuxtjs/html-validator'],
   imports: {
-    dirs: ["./store"],
+    dirs: ['./store'],
   },
   vite: {
     css: {
@@ -18,4 +18,4 @@ export default defineNuxtConfig({
       },
     },
   },
-});
+})
