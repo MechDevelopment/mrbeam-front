@@ -25,6 +25,8 @@
     <div class="list" v-for="point in points" :key="point.x">
       <span>{{ point.name }}</span> <span>{{ point.x }}</span>
     </div>
+
+    <Icons />
   </div>
 </template>
 

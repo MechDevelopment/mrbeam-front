@@ -1,6 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@pinia/nuxt', '@nuxtjs/color-mode', '@nuxtjs/html-validator'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/color-mode',
+    '@nuxtjs/html-validator',
+    'nuxt-icons',
+  ],
   imports: {
     dirs: ['./store'],
   },
