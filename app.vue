@@ -3,14 +3,18 @@
 </template>
 
 <script lang="ts" setup>
-useHead({
-  title: 'Mr Beam',
-  htmlAttrs: {
-    lang: 'en',
-  },
+const { locale, getDictionaryAsync } = useLocale()
+
+useAsyncData(async () => {
+  await Promise.all([getDictionaryAsync()])
+
+  useHead({
+    title: 'Mr Beam',
+    htmlAttrs: {
+      lang: locale.value || 'en',
+    },
+  })
+
+  return true
 })
 </script>
-
-<style lang="scss">
-// NOTE: Connect styles in nuxt
-</style>
