@@ -1,8 +1,10 @@
 body {
   font-family: 'Open Sans', sans-serif;
-
   background-color: var(--main-color);
   color: var(--text-color);
+
+  transition: 0.3s ease;
+  transition-property: background-color, color;
 }
 
 .container {
@@ -16,4 +18,16 @@ body {
   @include mw(450px) {
     margin: 0 16px;
   }
+}
+
+.sr-only {
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
 }

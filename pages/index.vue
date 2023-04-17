@@ -14,7 +14,7 @@
 
     <div class="image-container">
       <img v-if="image" ref="imageRef" :src="image" alt="inserted beam" />
-      <DraggableBox
+      <TrashDraggableBox
         v-for="box in boxes"
         :key="box.confidence"
         :imageSize="imageSize"
@@ -26,7 +26,7 @@
       <span>{{ point.name }}</span> <span>{{ point.x }}</span>
     </div>
 
-    <Icons />
+    <TrashIcons />
   </div>
 </template>
 

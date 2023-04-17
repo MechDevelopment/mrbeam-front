@@ -18,3 +18,7 @@ useAsyncData(async () => {
   return true
 })
 </script>
+
+<style lang="scss">
+// Global scss
+</style>
